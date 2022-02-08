@@ -1,20 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap");
+
 html,
 body {
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: "Quicksand", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #7700ee;
-  color: #fff;
+  color: #000;
   overflow-x: hidden;
 }
+
 #root {
   min-height: 100vh;
   display: flex;
 }
 
+p {
+  font-weight: bold;
+}
+
 h1 {
   font-size: 5rem;
+  font-weight: bold;
 }
 @media screen and (max-width: 768px) {
   h1 {
