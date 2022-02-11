@@ -83,11 +83,13 @@ const shortenAddress = (str) => {
   return str.substring(0, 6) + "..." + str.substring(str.length - 4);
 };
 
+
+const [loadingMemberList, setLoadingMemeberList] = useState(true);
 // This useEffect grabs all the addresses of our members holding our NFT.
 useEffect(() => {
-  if (!hasClaimedNFT) {
+/*   if (!hasClaimedNFT) {
     return;
-  }
+  } */
   
   // Just like we did in the 7-airdrop-token.js file! Grab the users who hold our NFT
   // with tokenId 0.
@@ -96,6 +98,7 @@ useEffect(() => {
     .then((addresses) => {
       console.log("🚀 Members addresses", addresses)
       setMemberAddresses(addresses);
+      setLoadingMemeberList(false);
     })
     .catch((err) => {
       console.error("failed to get member list", err);
@@ -123,6 +126,7 @@ useEffect(() => {
 // Now, we combine the memberAddresses and memberTokenAmounts into a single array
 const memberList = useMemo(() => {
   return memberAddresses.map((address) => {
+    console.log(address)
     return {
       address,
       tokenAmount: ethers.utils.formatUnits(
@@ -353,13 +357,17 @@ const memberList = useMemo(() => {
   // Render mint nft screen.
   return (
     <div className="mint-nft">
-      <h2>Mint your mealqlub NFT to join the DAO!</h2>
+      <h2>You will be the founding user</h2>
+      <h1>{loadingMemberList ? "loading..." : `#${memberList.length + 1}`}</h1>
+      
       <button
+      className="btn-gradient"
         disabled={isClaiming}
         onClick={() => mintNft()}
       >
-        {isClaiming ? "Minting..." : "Mint your nft (FREE)"}
+        {isClaiming ? "Minting..." : "Claim your NFT to join the mealqlub"}
       </button>
+      <p><i>make sure you have enough ETH for the gas fee ⛽</i></p>
     </div>
   );
 };

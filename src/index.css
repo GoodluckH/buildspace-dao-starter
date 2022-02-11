@@ -10,6 +10,12 @@ body {
   overflow-x: hidden;
 }
 
+.btn-gradient {
+  background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
+  border: 0;
+  color: white;
+}
+
 #root {
   min-height: 100vh;
   display: flex;

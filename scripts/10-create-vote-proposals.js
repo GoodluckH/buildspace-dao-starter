@@ -19,8 +19,11 @@ const tokenModule = sdk.getTokenModule(
       "Should the DAO mint an additional " +
         amount +
         " tokens into the treasury?",
+
       [
         {
+          // Our token module that actually executes the mint.
+          toAddress: tokenModule.address,
           // Our nativeToken is ETH. nativeTokenValue is the amount of ETH we want
           // to send in this proposal. In this case, we're sending 0 ETH.
           // We're just minting new tokens to the treasury. So, set to 0.
@@ -31,8 +34,6 @@ const tokenModule = sdk.getTokenModule(
             "mint",
             [voteModule.address, ethers.utils.parseUnits(amount.toString(), 18)]
           ),
-          // Our token module that actually executes the mint.
-          toAddress: tokenModule.address,
         },
       ]
     );
