@@ -15,6 +15,7 @@ const tokenModule = sdk.getTokenModule(
   try {
     const amount = 500;
     // Create proposal to mint 500 new token to the treasury.
+    await tokenModule.delegateTo(process.env.WALLET_ADDRESS);
     await voteModule.propose(
       "Should the DAO mint an additional " +
         amount +
