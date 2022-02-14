@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ethers } from "ethers";
 import { useWeb3 } from "@3rdweb/hooks";
 import { ThirdwebSDK } from "@3rdweb/sdk";
-
+import { UnsupportedChainIdError } from "@web3-react/core";
 const sdk = new ThirdwebSDK("rinkeby");
 
 const bundleDropModule = sdk.getBundleDropModule(
@@ -15,7 +15,7 @@ const voteModule = sdk.getVoteModule(
 );
 
 const App = () => {
-  const { connectWallet, address, provider } = useWeb3();
+  const { connectWallet, address, error, provider } = useWeb3();
   console.log("👋 Address:", address)
 
   // The signer is required to sign transactions on the blockchain.
@@ -166,6 +166,26 @@ const memberList = useMemo(() => {
       });
   }, [address]);
 
+ 
+
+  // ================================ VIEWS ===================================
+  // ================================ VIEWS ===================================
+  // ================================ VIEWS ===================================
+  // ================================ VIEWS ===================================
+  // ================================ VIEWS ===================================
+
+  if (error instanceof UnsupportedChainIdError ) {
+    return (
+      <div className="unsupported-network">
+        <h2>Please connect to Rinkeby</h2>
+        <p>
+          This dapp only works on the Rinkeby network, please switch networks
+          in your connected wallet.
+        </p>
+      </div>
+    );
+  }
+  
   if (!address) {
     return (
       <div className="landing">
